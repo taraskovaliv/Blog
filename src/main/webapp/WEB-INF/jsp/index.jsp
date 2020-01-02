@@ -14,10 +14,7 @@
             Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.
             Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks. </p>
         </div>
-        <div id="sidebar">
-            <p><a href="#">Menu 1</a></p>
-            <p><a href="#">Menu 2</a></p>
-        </div>
+        <jsp:include page="menu/menu.jsp" />
         <jsp:include page="fragments/footer.jsp" />
    </body>
 </html>
