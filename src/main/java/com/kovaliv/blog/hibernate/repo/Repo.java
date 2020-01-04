@@ -1,18 +1,21 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.hibernate.models.User;
+import com.kovaliv.blog.hibernate.HibernateUtil;
+import com.kovaliv.blog.hibernate.models.DataModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-public class UserRepo extends Repo {
+public class Repo {
 
-    public static void delete(Integer id) {
+    protected static SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+    public static void add(DataModel data) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.load(User.class, id);
-            session.delete(user);
+            session.save(data);
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException ex) {
@@ -21,19 +24,17 @@ public class UserRepo extends Repo {
         }
     }
 
-    public static User get(Integer id) {
+    public static void delete(DataModel data) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.load(User.class, id);
+            session.delete(data);
             session.getTransaction().commit();
             session.close();
-            return user;
         } catch (HibernateException ex) {
             session.getTransaction().rollback();
             throw ex;
         }
     }
-
 }
