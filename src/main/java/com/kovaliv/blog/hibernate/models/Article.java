@@ -1,5 +1,7 @@
 package com.kovaliv.blog.hibernate.models;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +10,8 @@ public class Article implements DataModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, unique = true)
-    private int id;
+    @Column(name = "ArticleID", nullable = false, unique = true)
+    private int articleId;
 
     @Column(name = "NAME")
     private String name;
@@ -17,12 +19,20 @@ public class Article implements DataModel{
     @Column(name = "TEXT")
     private String text;
 
-    public int getId() {
-        return id;
+    @Column(name = "READS")
+    @ColumnDefault("0")
+    private int reads;
+
+    @ManyToOne
+    @JoinColumn(name = "UserID")
+    private int author;
+
+    public int getArticleId() {
+        return articleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public String getName() {
@@ -39,5 +49,21 @@ public class Article implements DataModel{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getReads() {
+        return reads;
+    }
+
+    public void setReads(int reads) {
+        this.reads = reads;
+    }
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
     }
 }
