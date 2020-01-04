@@ -5,17 +5,22 @@
 
    <jsp:include page="../fragments/headSmall.jsp" />
 
-   <body >
-        <jsp:include page="../fragments/header.jsp" />
+   <body>
+        <div id="small">
+            <jsp:include page="../fragments/header.jsp" />
 
-        <div>
-            <h2>LOGIN</h2>
-            <form action="login" method="post">
-                <input type="text" name="login"><br>
-                <input type="password" name="password"><br>
-                <input type="submit" value="Login">
-            </form>
+            <div id = "center_form">
+                <h2>LOGIN</h2>
+                <form action="login" method="post">
+                    <p>Login</p>
+                        <input type="text" name="login"><br>
+                    <p>Password</p>
+                        <input type="password" name="password"><br>
+                    <input id="button" type="submit" value="Login">
+                </form>
+            </div>
+
+            <jsp:include page="../fragments/footer.jsp" />
         </div>
-        <jsp:include page="../fragments/footer.jsp" />
    </body>
 </html>
