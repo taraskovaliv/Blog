@@ -10,6 +10,9 @@
 
         <div id="content">
             <h2>Profile ${login}</h2>
+            <p>Your id = ${id}</p>
+            <p>You are ${name} ${surname}</p>
+            <p>Your email ${email}</p>
         </div>
         <jsp:include page="../menu/menu.jsp" />
         <jsp:include page="../fragments/footer.jsp" />

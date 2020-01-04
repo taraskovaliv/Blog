@@ -2,7 +2,6 @@ package com.kovaliv.blog.hibernate.repo;
 
 import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
-import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

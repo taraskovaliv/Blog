@@ -86,12 +86,12 @@ public class UserRepo extends Repo {
         return UserValid.VALID;
     }
 
-    public static LoginStatus login(User user){
+    public static LoginStatus login(User user) {
         User user1 = get(user.getLogin());
-        if(user1 == null){
+        if (user1 == null) {
             return LoginStatus.USERNAMEIRRCORECT;
         }
-        if(user1.getPassword().equals(user.getPassword())){
+        if (user1.getPassword().equals(user.getPassword())) {
             return LoginStatus.LOGIN;
         }
         return LoginStatus.PASSWORDIRRCORECT;

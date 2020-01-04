@@ -29,7 +29,7 @@ public class LoginController {
             model.addAttribute("menu", 1);
             return "index";
         }
-        if(loginStatus == LoginStatus.USERNAMEIRRCORECT){
+        if (loginStatus == LoginStatus.USERNAMEIRRCORECT) {
             model.addAttribute("message", "Username irrcorect");
             return "pages/login";
         }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
-public class Article implements DataModel{
+public class Article implements DataModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
