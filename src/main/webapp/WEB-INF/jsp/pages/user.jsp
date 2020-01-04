@@ -9,10 +9,7 @@
         <jsp:include page="../fragments/header.jsp" />
 
         <div id="content">
-            <h2>USER NAME</h2>
-            <p>USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info.
-            USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info.
-            USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. USER info. </p>
+            <h2>Profile ${login}</h2>
         </div>
         <jsp:include page="../menu/menu.jsp" />
         <jsp:include page="../fragments/footer.jsp" />

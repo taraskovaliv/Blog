@@ -1,20 +1,38 @@
 body {
     font: 11pt Arial, Helvetica, sans-serif;
-    margin: 0;
+    margin 10px;
 }
 
 h1  {
+    text-align: center;
     font-size: 36 px;
     margin: 0;
     color: #fff;
     clear: center;
 }
 
-h2 {
-    text-align: center;
-    width:100%;
-    margin-top: 0;
+#small {
+    border: dashed;
+    border-width: 4px;
+    border-radius: 50px;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    padding: 20px;
 }
+
+#center_form{
+    margin-right: 20%;
+    margin-left: 20%;
+    padding: 0px;
+    width: 60%;
+    text-align: center;
+}
+
+#button{
+    margin: 10px;
+}
+
 #header {
     left: 10%;
     background: #CC0099;
@@ -26,18 +44,6 @@ h2 {
     text-decoration: none;
 }
 
-#sidebar {
-    padding: 5px;
-    margin: 10px 10px 20px 80%;
-}
-
-#content {
-    margin: 10px 5px 20px 5px;
-    width: 75%;
-    float: left;
-    padding: 5px;
-}
-
 #footer {
     left:5%;
     background: #333;
@@ -45,4 +51,3 @@ h2 {
     color: #fff;
     clear: left;
 }
-
