@@ -1,22 +1,21 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.enams.LoginStatus;
-import com.kovaliv.blog.enams.UserValid;
+import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-public class UserRepo extends Repo {
-
+public class ArticleRepo extends Repo {
     public static void delete(Integer id) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.load(User.class, id);
-            session.delete(user);
+            Article article = session.load(Article.class, id);
+            session.delete(article);
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException ex) {
@@ -27,15 +26,15 @@ public class UserRepo extends Repo {
         }
     }
 
-    public static User get(Integer id) {
+    public static Article get(Integer id) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.load(User.class, id);
+            Article article = session.load(Article.class, id);
             session.getTransaction().commit();
             session.close();
-            return user;
+            return article;
         } catch (HibernateException ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -44,16 +43,16 @@ public class UserRepo extends Repo {
         }
     }
 
-    public static User get(String login) {
+    public static Article get(String name) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
             Criteria criteria = session.createCriteria(User.class);
-            User user = (User) criteria.add(Restrictions.eq("LOGIN", login)).uniqueResult();
+            Article article = (Article) criteria.add(Restrictions.eq("NAME", name)).uniqueResult();
             session.getTransaction().commit();
             session.close();
-            return user;
+            return article;
         } catch (HibernateException ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -61,40 +60,4 @@ public class UserRepo extends Repo {
             throw ex;
         }
     }
-
-    public static UserValid isValid(User user) {
-        if (user.getName() == null) {
-            return UserValid.NAMENULL;
-        }
-        if (user.getEmail() == null) {
-            return UserValid.EMAILNULL;
-        }
-        if (user.getSurname() == null) {
-            return UserValid.SURNAMENULL;
-        }
-        if (user.getPassword() == null) {
-            return UserValid.PASSWORDNULL;
-        }
-        if (user.getLogin() == null) {
-            return UserValid.LOGINNULL;
-        } else {
-            User user1 = get(user.getLogin());
-            if (user1 != null) {
-                return UserValid.LOGINNOTUNIQUE;
-            }
-        }
-        return UserValid.VALID;
-    }
-
-    public static LoginStatus login(User user){
-        User user1 = get(user.getLogin());
-        if(user1 == null){
-            return LoginStatus.USERNAMEIRRCORECT;
-        }
-        if(user1.getPassword().equals(user.getPassword())){
-            return LoginStatus.LOGIN;
-        }
-        return LoginStatus.PASSWORDIRRCORECT;
-    }
-
 }
