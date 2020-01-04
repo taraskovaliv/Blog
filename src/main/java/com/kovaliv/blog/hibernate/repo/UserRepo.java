@@ -1,5 +1,6 @@
 package com.kovaliv.blog.hibernate.repo;
 
+import com.kovaliv.blog.enams.LoginStatus;
 import com.kovaliv.blog.enams.UserValid;
 import com.kovaliv.blog.hibernate.models.User;
 import org.hibernate.Criteria;
@@ -39,7 +40,7 @@ public class UserRepo extends Repo {
         }
     }
 
-    public static User getByLogin(String login) {
+    public static User get(String login) {
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -71,12 +72,23 @@ public class UserRepo extends Repo {
         if (user.getLogin() == null) {
             return UserValid.LOGINNULL;
         } else {
-            User user1 = getByLogin(user.getLogin());
+            User user1 = get(user.getLogin());
             if (user1 != null) {
                 return UserValid.LOGINNOTUNIQUE;
             }
         }
         return UserValid.VALID;
+    }
+
+    public static LoginStatus login(User user){
+        User user1 = get(user.getLogin());
+        if(user1 == null){
+            return LoginStatus.USERNAMEIRRCORECT;
+        }
+        if(user1.getPassword().equals(user.getPassword())){
+            return LoginStatus.LOGIN;
+        }
+        return LoginStatus.PASSWORDIRRCORECT;
     }
 
 }

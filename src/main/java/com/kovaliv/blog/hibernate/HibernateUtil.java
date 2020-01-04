@@ -18,9 +18,9 @@ public class HibernateUtil {
 
             Properties properties = new Properties();
             properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-            properties.put("hibernate.connection.url", "jdbc:mysql://localhost/blogDB");
+            properties.put("hibernate.connection.url", "jdbc:mysql://localhost/MSSQLLocalDB");
             properties.put("hibernate.connection.username", "taras");
-            properties.put("hibernate.connection.password", "myblog");
+            properties.put("hibernate.connection.password", "11111111Taras");
             properties.put("hibernate.current_session_context_class", "thread");
 
             configuration.setProperties(properties);

@@ -1,5 +1,6 @@
 package com.kovaliv.blog.controllers;
 
+import com.kovaliv.blog.enams.LoginStatus;
 import com.kovaliv.blog.enams.UserValid;
 import com.kovaliv.blog.hibernate.models.User;
 import com.kovaliv.blog.hibernate.repo.UserRepo;
@@ -21,10 +22,19 @@ public class LoginController {
 
     @PostMapping(value = "login")
     public String login(@Validated User user, Model model) {
-        setUser(user);
-        model.addAttribute("name", user.getName());
-        model.addAttribute("menu", 1);
-        return "index";
+        LoginStatus loginStatus = UserRepo.login(user);
+        if (loginStatus == LoginStatus.LOGIN) {
+            setUser(user);
+            model.addAttribute("name", user.getName());
+            model.addAttribute("menu", 1);
+            return "index";
+        }
+        if(loginStatus == LoginStatus.USERNAMEIRRCORECT){
+            model.addAttribute("message", "Username irrcorect");
+            return "pages/login";
+        }
+        model.addAttribute("message", "Password irrcorect");
+        return "pages/login";
     }
 
     @GetMapping(value = "register")
@@ -35,7 +45,7 @@ public class LoginController {
     @PostMapping(value = "register")
     public String register(@Validated User user, Model model) {
         setUser(user);
-        if(UserRepo.isValid(user) == UserValid.VALID){
+        if (UserRepo.isValid(user) == UserValid.VALID) {
             UserRepo.add(user);
             model.addAttribute("name", user.getName());
             model.addAttribute("menu", 1);
@@ -51,20 +61,20 @@ public class LoginController {
         return "pages/login";
     }
 
-    private static String getMessage(UserValid userValid){
-        if(userValid == UserValid.EMAILNULL){
+    private static String getMessage(UserValid userValid) {
+        if (userValid == UserValid.EMAILNULL) {
             return "Input EMAIL";
         }
-        if(userValid == UserValid.NAMENULL){
+        if (userValid == UserValid.NAMENULL) {
             return "Input Name";
         }
-        if(userValid == UserValid.LOGINNULL){
+        if (userValid == UserValid.LOGINNULL) {
             return "Input USERNAME";
         }
-        if(userValid == UserValid.SURNAMENULL){
+        if (userValid == UserValid.SURNAMENULL) {
             return "Input Surname";
         }
-        if(userValid == UserValid.PASSWORDNULL ){
+        if (userValid == UserValid.PASSWORDNULL) {
             return "Input PASSWORD";
         }
         return "Username is not available";

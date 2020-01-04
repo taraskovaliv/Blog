@@ -11,7 +11,7 @@
 
             <div id = "center_form">
                 <h2>Register</h2>
-                <p>${message}</p>
+                <p id = "message">${message}</p>
                 <form action="register" method="post">
                     <p>Name</p>
                     <input type="text" name="name"><br>
