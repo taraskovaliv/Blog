@@ -4,25 +4,44 @@ import com.kovaliv.blog.hibernate.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoginController {
 
     private static User user;
 
-    @RequestMapping("login")
-    public String getLogin(){
+    @GetMapping("login")
+    public String getLogin() {
         return "pages/login";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@Validated User user, Model model){
+    @PostMapping(value = "login")
+    public String login(@Validated User user, Model model) {
         setUser(user);
-        model.addAttribute("login", user.getLogin());
-        model.addAttribute("password", user.getPassword());
+        model.addAttribute("name", user.getName());
+        model.addAttribute("menu", 1);
         return "index";
+    }
+
+    @GetMapping(value = "register")
+    public String getRegister() {
+        return "pages/register";
+    }
+
+    @PostMapping(value = "register")
+    public String register(@Validated User user, Model model) {
+        setUser(user);
+        model.addAttribute("name", user.getName());
+        model.addAttribute("menu", 1);
+        return "index";
+    }
+
+    @GetMapping(value = "logout")
+    public String logout() {
+        setUser(null);
+        return "pages/login";
     }
 
     public static User getUser() {

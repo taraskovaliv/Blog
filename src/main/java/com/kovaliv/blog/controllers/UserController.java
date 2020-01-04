@@ -10,7 +10,13 @@ public class UserController {
     @RequestMapping("user")
     public String getUser(Model model) {
         if (LoginController.getUser() != null) {
+            model.addAttribute("menu", 1);
             model.addAttribute("login", LoginController.getUser().getLogin());
+            model.addAttribute("name", LoginController.getUser().getName());
+            model.addAttribute("surname", LoginController.getUser().getSurname());
+            model.addAttribute("email", LoginController.getUser().getEmail());
+        }else {
+            model.addAttribute("menu", 0);
         }
         return "pages/user";
     }
