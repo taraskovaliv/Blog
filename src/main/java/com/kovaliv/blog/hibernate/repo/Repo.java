@@ -33,7 +33,9 @@ public class Repo {
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException ex) {
-            session.getTransaction().rollback();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
             throw ex;
         }
     }
