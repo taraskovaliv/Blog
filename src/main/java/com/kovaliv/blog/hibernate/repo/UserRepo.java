@@ -1,8 +1,11 @@
 package com.kovaliv.blog.hibernate.repo;
 
+import com.kovaliv.blog.enams.UserValid;
 import com.kovaliv.blog.hibernate.models.User;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 public class UserRepo extends Repo {
 
@@ -34,6 +37,46 @@ public class UserRepo extends Repo {
             session.getTransaction().rollback();
             throw ex;
         }
+    }
+
+    public static User getByLogin(String login) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Criteria criteria = session.createCriteria(User.class);
+            User user = (User) criteria.add(Restrictions.eq("LOGIN", login)).uniqueResult();
+            session.getTransaction().commit();
+            session.close();
+            return user;
+        } catch (HibernateException ex) {
+            session.getTransaction().rollback();
+            throw ex;
+        }
+    }
+
+    public static UserValid isValid(User user) {
+        if (user.getName() == null) {
+            return UserValid.NAMENULL;
+        }
+        if (user.getEmail() == null) {
+            return UserValid.EMAILNULL;
+        }
+        if (user.getSurname() == null) {
+            return UserValid.SURNAMENULL;
+        }
+        if (user.getPassword() == null) {
+            return UserValid.PASSWORDNULL;
+        }
+        if (user.getLogin() == null) {
+            return UserValid.LOGINNULL;
+        } else {
+            User user1 = getByLogin(user.getLogin());
+            if (user1 != null) {
+                return UserValid.LOGINNOTUNIQUE;
+            }
+        }
+        return UserValid.VALID;
     }
 
 }

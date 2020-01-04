@@ -1,6 +1,8 @@
 package com.kovaliv.blog.controllers;
 
+import com.kovaliv.blog.enams.UserValid;
 import com.kovaliv.blog.hibernate.models.User;
+import com.kovaliv.blog.hibernate.repo.UserRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -33,15 +35,39 @@ public class LoginController {
     @PostMapping(value = "register")
     public String register(@Validated User user, Model model) {
         setUser(user);
-        model.addAttribute("name", user.getName());
-        model.addAttribute("menu", 1);
-        return "index";
+        if(UserRepo.isValid(user) == UserValid.VALID){
+            UserRepo.add(user);
+            model.addAttribute("name", user.getName());
+            model.addAttribute("menu", 1);
+            return "index";
+        }
+
+        return "pages/register";
     }
 
     @GetMapping(value = "logout")
     public String logout() {
         setUser(null);
         return "pages/login";
+    }
+
+    private static String getMessage(UserValid userValid){
+        if(userValid == UserValid.EMAILNULL){
+            return "Input EMAIL";
+        }
+        if(userValid == UserValid.NAMENULL){
+            return "Input Name";
+        }
+        if(userValid == UserValid.LOGINNULL){
+            return "Input USERNAME";
+        }
+        if(userValid == UserValid.SURNAMENULL){
+            return "Input Surname";
+        }
+        if(userValid == UserValid.PASSWORDNULL ){
+            return "Input PASSWORD";
+        }
+        return "Username is not available";
     }
 
     public static User getUser() {

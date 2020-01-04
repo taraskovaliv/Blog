@@ -12,7 +12,7 @@
             <div id = "center_form">
                 <h2>LOGIN</h2>
                 <form action="login" method="post">
-                    <p>Login</p>
+                    <p>Username</p>
                         <input type="text" name="login"><br>
                     <p>Password</p>
                         <input type="password" name="password"><br>

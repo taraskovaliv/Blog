@@ -11,7 +11,7 @@ public class User implements DataModel{
     @Column(name = "ID", nullable = false, unique = true)
     private int id;
 
-    @Column(name = "LOGIN", nullable = false)
+    @Column(name = "LOGIN", nullable = false, unique = true)
     private String login;
 
     @Column(name = "PASSWORD", nullable = false)

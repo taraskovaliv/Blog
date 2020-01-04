@@ -11,6 +11,7 @@
 
             <div id = "center_form">
                 <h2>Register</h2>
+                <p>${message}</p>
                 <form action="register" method="post">
                     <p>Name</p>
                     <input type="text" name="name"><br>
@@ -18,7 +19,7 @@
                     <input type="text" name="surname"><br>
                     <p>Email</p>
                     <input type="email" name="email"><br>
-                    <p>Login</p>
+                    <p>Username</p>
                     <input type="text" name="login"><br>
                     <p>Password</p>
                     <input type="password" name="password"><br>
