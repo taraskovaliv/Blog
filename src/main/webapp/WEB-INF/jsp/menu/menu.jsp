@@ -1,16 +1,16 @@
 <div id="sidebar">
-
-    <p>User ${name}</p>
-    <p><a href="user">User</a></p>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ page import="com.kovaliv.blog.controllers.LoginController" %>
+    <%@ page import="com.kovaliv.blog.hibernate.models.User" %>
+    <%!
+        User user = LoginController.getUser();
+    %>
     <c:choose>
-        <c:when test="${menu == '1'}">
-            <p><a href="logout">logout</a></p>
+        <c:when test="not empty ${user}">
+            <jsp:include page="menu1.jsp" />
         </c:when>
         <c:otherwise>
-            <p><a href="login">Login</a></p>
-            <p><a href="register">Register</a></p>
+            <jsp:include page="menu2.jsp" />
         </c:otherwise>
     </c:choose>
-
-
 </div>

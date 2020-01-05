@@ -9,23 +9,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        if (LoginController.getUser() != null) {
-            model.addAttribute("login", LoginController.getUser().getLogin());
-            model.addAttribute("menu", 1);
-        } else {
-            model.addAttribute("menu", 0);
-        }
         return "index";
     }
 
     @GetMapping("index")
     public String getIndex(Model model) {
-        if (LoginController.getUser() != null) {
-            model.addAttribute("menu", 1);
-            model.addAttribute("login", LoginController.getUser().getLogin());
-        } else {
-            model.addAttribute("menu", 0);
-        }
         return "index";
     }
 

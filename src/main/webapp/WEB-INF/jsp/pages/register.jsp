@@ -10,22 +10,27 @@
             <jsp:include page="../fragments/header.jsp" />
 
             <div id = "center_form">
+
                 <h2>Register</h2>
+
                 <p id = "message">${message}</p>
+                <br>
+
                 <form action="register" method="post">
                     <p>Name</p>
-                    <input type="text" name="name"><br>
+                        <input type="text" name="name"><br>
                     <p>Surname</p>
-                    <input type="text" name="surname"><br>
+                        <input type="text" name="surname"><br>
                     <p>Email</p>
-                    <input type="email" name="email"><br>
+                        <input type="email" name="email"><br>
                     <p>Username</p>
-                    <input type="text" name="login"><br>
+                        <input type="text" name="login"><br>
                     <p>Password</p>
-                    <input type="password" name="password"><br>
-                    <input id="button" type="submit" value="Register">
+                        <input type="password" name="password"><br>
+                        <input id="button" type="submit" value="Register">
                 </form>
             </div>
+
             <jsp:include page="../fragments/footer.jsp" />
         </div>
    </body>
