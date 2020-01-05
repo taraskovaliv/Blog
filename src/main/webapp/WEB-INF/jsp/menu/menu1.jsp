@@ -7,7 +7,7 @@
     %>
 <c:if test="not empty ${name}">
     <br>
-        <p>${user}</p>
+        <p>${name}</p>
 </c:if>
 <br>
     <p><a href = "user" >Profile</a></p>
