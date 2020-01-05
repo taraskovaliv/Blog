@@ -10,8 +10,12 @@
             <jsp:include page="../fragments/header.jsp" />
 
             <div id = "center_form">
+
                 <h2>LOGIN</h2>
+
                 <p id = "message">${message}</p>
+                <br>
+
                 <form action="login" method="post">
                     <p>Username</p>
                         <input type="text" name="login"><br>

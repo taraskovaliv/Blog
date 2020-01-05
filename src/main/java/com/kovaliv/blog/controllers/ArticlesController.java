@@ -16,8 +16,7 @@ public class ArticlesController {
     @GetMapping(value = "myArticles")
     public static String getMyArticles(Model model) {
 
-        model.addAttribute("name", LoginController.getUser().getName());
-        model.addAttribute("surname", LoginController.getUser().getSurname());
+        model.addAttribute("user", LoginController.getUser());
 
         return "pages/articles";
     }
@@ -26,8 +25,7 @@ public class ArticlesController {
     public static String getArticles(@Validated Integer id, Model model) {
         User user = UserRepo.get(id);
 
-        model.addAttribute("name", user.getName());
-        model.addAttribute("surname", user.getSurname());
+        model.addAttribute("user", user);
 
         return "pages/articles";
     }

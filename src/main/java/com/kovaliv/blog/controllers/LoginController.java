@@ -25,8 +25,6 @@ public class LoginController {
         LoginStatus loginStatus = UserRepo.login(user);
         if (loginStatus == LoginStatus.LOGIN) {
             setUser(user);
-            model.addAttribute("name", user.getName());
-            model.addAttribute("menu", 1);
             return "index";
         }
         if (loginStatus == LoginStatus.USERNAMEIRRCORECT) {
@@ -44,14 +42,13 @@ public class LoginController {
 
     @PostMapping(value = "register")
     public String register(@Validated User user, Model model) {
-        setUser(user);
-        if (UserRepo.isValid(user) == UserValid.VALID) {
+        UserValid userValid = UserRepo.isValid(user);
+        if (userValid == UserValid.VALID) {
+            setUser(user);
             UserRepo.add(user);
-            model.addAttribute("name", user.getName());
-            model.addAttribute("menu", 1);
             return "index";
         }
-
+        model.addAttribute("message", getMessage(userValid));
         return "pages/register";
     }
 
