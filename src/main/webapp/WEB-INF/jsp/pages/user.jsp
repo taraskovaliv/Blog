@@ -11,7 +11,7 @@
        User user = LoginController.getUser();
        String name = user.toString();
        String login = user.getLogin();
-       Integer id = user.getId();
+       Integer id = user.getUserId();
        String email = user.getEmail();
    %>
    <body>
