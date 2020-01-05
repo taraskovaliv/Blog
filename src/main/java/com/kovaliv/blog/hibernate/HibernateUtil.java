@@ -1,5 +1,6 @@
 package com.kovaliv.blog.hibernate;
 
+import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -18,14 +19,15 @@ public class HibernateUtil {
 
             Properties properties = new Properties();
             properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-            properties.put("hibernate.connection.url", "jdbc:mysql://localhost/MSSQLLocalDB");
-            properties.put("hibernate.connection.username", "taras");
-            properties.put("hibernate.connection.password", "11111111Taras");
+            properties.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/dbname");
+            properties.put("hibernate.connection.username", "root");
+            properties.put("hibernate.connection.password", "1111taras");
             properties.put("hibernate.current_session_context_class", "thread");
 
             configuration.setProperties(properties);
 
             configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Article.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 

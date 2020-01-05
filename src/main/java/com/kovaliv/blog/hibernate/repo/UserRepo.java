@@ -44,6 +44,24 @@ public class UserRepo extends Repo {
         }
     }
 
+    public static void edit(User user) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            User user1 = session.load(User.class, user.getUserId());
+            session.delete(user1);
+            session.save(user);
+            session.getTransaction().commit();
+            session.close();
+        } catch (HibernateException ex) {
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            throw ex;
+        }
+    }
+
     public static User get(String login) {
         Session session = null;
         try {
