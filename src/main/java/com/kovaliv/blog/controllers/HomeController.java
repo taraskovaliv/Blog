@@ -12,8 +12,6 @@ public class HomeController {
         if (LoginController.getUser() != null) {
             model.addAttribute("login", LoginController.getUser().getLogin());
             model.addAttribute("menu", 1);
-        } else {
-            model.addAttribute("menu", 0);
         }
         return "index";
     }
@@ -23,8 +21,6 @@ public class HomeController {
         if (LoginController.getUser() != null) {
             model.addAttribute("menu", 1);
             model.addAttribute("login", LoginController.getUser().getLogin());
-        } else {
-            model.addAttribute("menu", 0);
         }
         return "index";
     }

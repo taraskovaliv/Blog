@@ -1,16 +1,10 @@
 <div id="sidebar">
-
-    <p>User ${name}</p>
-    <p><a href="user">User</a></p>
     <c:choose>
-        <c:when test="${menu == '1'}">
-            <p><a href="logout">logout</a></p>
+        <c:when test="${not empty menu}">
+            <jsp:include page="menu1.jsp" />
         </c:when>
         <c:otherwise>
-            <p><a href="login">Login</a></p>
-            <p><a href="register">Register</a></p>
+            <jsp:include page="menu2.jsp" />
         </c:otherwise>
     </c:choose>
-
-
 </div>
