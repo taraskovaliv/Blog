@@ -32,8 +32,6 @@
                         <input type="text" name="surname" value = ${surname}><br>
                     <p>Email</p>
                         <input type="email" name="email" value = ${email}><br>
-                    <p>Username</p>
-                        <input type="text" name="login" value = ${login}><br>
                     <p>Password</p>
                         <input type="password" name="password" value = ${password}><br>
                         <input id="button" type="submit" value="Edit">

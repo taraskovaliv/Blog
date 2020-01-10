@@ -6,35 +6,33 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
-public class Article implements DataModel, Serializable {
+@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "Article_ID")})
+public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, unique = true)
-    private int id;
+    @Column(name = "Article_ID", nullable = false, unique = true)
+    private int articleId;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "TEXT")
+    @Column(name = "text")
     private String text;
 
-    @Column(name = "READS")
+    @Column(name = "reads")
     @ColumnDefault("0")
     private int reads;
 
-//    @ManyToOne
-//    @JoinColumn(name = "UserID")
-//    private int author;
+    @Column(name = "author")
+    private int author;
 
-
-    public int getId() {
-        return id;
+    public int getArticleId() {
+        return articleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public String getName() {

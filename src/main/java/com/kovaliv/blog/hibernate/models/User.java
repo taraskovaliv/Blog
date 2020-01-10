@@ -1,11 +1,17 @@
 package com.kovaliv.blog.hibernate.models;
 
+import com.kovaliv.blog.hibernate.enams.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID"})})
-public class User implements DataModel, Serializable {
+public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +33,8 @@ public class User implements DataModel, Serializable {
     @Column(name = "name")
     private String name;
 
-//    @OneToMany(mappedBy = "author")
-//    private Set<Article> articles = new HashSet<Article>();
-
+    @Column(name = "roles")
+    private Set<Role> roles;
 
     public int getId() {
         return id;
@@ -47,12 +52,50 @@ public class User implements DataModel, Serializable {
         this.login = login;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getEmail() {
