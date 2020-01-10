@@ -30,14 +30,14 @@ public class ArticlesController {
         return "pages/articles";
     }
 
-    @PostMapping(value = "addArticle")
-    public static String addArticles(@Validated Article article, Model model) {
-
-        article.setAuthor(LoginController.getUser().getUserId());
-        Repo.add(article);
-
-        return getMyArticles(model);
-    }
+//    @PostMapping(value = "addArticle")
+//    public static String addArticles(@Validated Article article, Model model) {
+//
+//        article.setAuthor(LoginController.getUser().getUserId());
+//        Repo.add(article);
+//
+//        return getMyArticles(model);
+//    }
 
     @GetMapping(value = "addArticle")
     public static String newArticle() {

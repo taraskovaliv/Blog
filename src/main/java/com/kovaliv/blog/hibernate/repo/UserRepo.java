@@ -49,7 +49,7 @@ public class UserRepo extends Repo {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user1 = session.load(User.class, user.getUserId());
+            User user1 = session.load(User.class, user.getId());
             session.delete(user1);
             session.save(user);
             session.getTransaction().commit();
@@ -68,7 +68,7 @@ public class UserRepo extends Repo {
             session = sessionFactory.openSession();
             session.beginTransaction();
             Criteria criteria = session.createCriteria(User.class);
-            User user = (User) criteria.add(Restrictions.eq("LOGIN", login)).uniqueResult();
+            User user = (User) criteria.add(Restrictions.eq("login", login)).uniqueResult();
             session.getTransaction().commit();
             session.close();
             return user;

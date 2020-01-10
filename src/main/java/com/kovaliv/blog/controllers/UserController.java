@@ -31,7 +31,7 @@ public class UserController {
                 return "pages/user";
             }
         }
-        user.setUserId(LoginController.getUser().getUserId());
+        user.setId(LoginController.getUser().getId());
         UserRepo.edit(user);
         return "pages/user";
     }

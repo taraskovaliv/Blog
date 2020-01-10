@@ -15,7 +15,7 @@ public class Repo {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.save(data);
+            session.persist(data);
             session.getTransaction().commit();
             session.close();
         } catch (HibernateException ex) {

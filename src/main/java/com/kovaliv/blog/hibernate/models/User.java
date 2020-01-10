@@ -1,42 +1,42 @@
 package com.kovaliv.blog.hibernate.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID"})})
-public class User implements DataModel {
+public class User implements DataModel, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "UserID", nullable = false, unique = true)
-    private int userId;
+    @Column(name = "ID", nullable = false, unique = true)
+    private int id;
 
-    @Column(name = "LOGIN", nullable = false, unique = true)
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "SURNAME")
+    @Column(name = "surname")
     private String surname;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "author")
-    private Set<Article> articles = new HashSet<Article>();
+//    @OneToMany(mappedBy = "author")
+//    private Set<Article> articles = new HashSet<Article>();
 
-    public int getUserId() {
-        return userId;
+
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int іd) {
+        this.id = іd;
     }
 
     public String getLogin() {
@@ -77,14 +77,6 @@ public class User implements DataModel {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public Set<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
     }
 
     @Override
