@@ -6,7 +6,7 @@
         User user = LoginController.getUser();
     %>
     <c:choose>
-        <c:when test="not empty ${user}">
+        <c:when test="${user ne null}">
             <jsp:include page="menu1.jsp" />
         </c:when>
         <c:otherwise>

@@ -3,28 +3,28 @@ package com.kovaliv.blog.hibernate.models;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
-public class Article implements DataModel {
+@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "Article_ID")})
+public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ArticleID", nullable = false, unique = true)
+    @Column(name = "Article_ID", nullable = false, unique = true)
     private int articleId;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "TEXT")
+    @Column(name = "text")
     private String text;
 
-    @Column(name = "READS")
+    @Column(name = "reads")
     @ColumnDefault("0")
     private int reads;
 
-    @ManyToOne
-    @JoinColumn(name = "UserID")
+    @Column(name = "author")
     private int author;
 
     public int getArticleId() {
@@ -59,11 +59,4 @@ public class Article implements DataModel {
         this.reads = reads;
     }
 
-    public int getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(int author) {
-        this.author = author;
-    }
 }

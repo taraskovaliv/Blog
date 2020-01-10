@@ -2,6 +2,7 @@ package com.kovaliv.blog.controllers;
 
 import com.kovaliv.blog.hibernate.models.User;
 import com.kovaliv.blog.hibernate.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserRepo userRepo;
 
     @GetMapping("user")
     public String getUser() {
@@ -23,16 +27,8 @@ public class UserController {
     }
 
     @PostMapping("editProfile")
-    public String editProfile(@Validated User user, Model model){
-        if(!user.getLogin().equals(LoginController.getUser().getLogin())){
-            User user1 = UserRepo.get(user.getLogin());
-            if(user1 != null){
-                model.addAttribute("message", "login is not available");
-                return "pages/user";
-            }
-        }
-        user.setUserId(LoginController.getUser().getUserId());
-        UserRepo.edit(user);
+    public String editProfile(@Validated User user, Model model) {
+        userRepo.edit(user);
         return "pages/user";
     }
 }
