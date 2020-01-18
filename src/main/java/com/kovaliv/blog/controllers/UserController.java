@@ -15,18 +15,18 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public String getUser() {
 
         return "pages/user";
     }
 
-    @GetMapping("editProfile")
+    @GetMapping("/editProfile")
     public String editPage() {
         return "pages/editProfile";
     }
 
-    @PostMapping("editProfile")
+    @PostMapping("/editProfile")
     public String editProfile(@Validated User user, Model model) {
         userRepo.edit(user);
         return "pages/user";

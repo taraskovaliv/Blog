@@ -4,7 +4,6 @@
 <html lang="ua">
 
    <jsp:include page="fragments/head.jsp" />
-
    <body>
         <jsp:include page="fragments/header.jsp" />
 

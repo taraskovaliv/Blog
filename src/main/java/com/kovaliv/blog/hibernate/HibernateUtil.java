@@ -6,18 +6,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-@Component
 public class HibernateUtil {
 
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    private SessionFactory buildSessionFactory() {
+    private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration();
 
@@ -50,8 +48,7 @@ public class HibernateUtil {
         }
     }
 
-    @Bean
-    public SessionFactory sessionFactory() {
+    public static SessionFactory sessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = buildSessionFactory();
         }
