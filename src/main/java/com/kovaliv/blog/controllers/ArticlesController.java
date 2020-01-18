@@ -17,7 +17,7 @@ public class ArticlesController {
     }
 
     @PostMapping(value = "/articles")
-    public static String getArticles(@Validated Integer id, Model model) {
+    public static String getArticles(@Validated Integer id) {
 
         return "pages/articles";
     }

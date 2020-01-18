@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,8 +34,8 @@ public class User implements Serializable, UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "roles")
-    private Set<Role> roles;
+    @Column(name = "role")
+    private Role role;
 
     public int getId() {
         return id;
@@ -54,7 +55,9 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        return roles;
     }
 
     @Override
@@ -90,12 +93,12 @@ public class User implements Serializable, UserDetails {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getEmail() {

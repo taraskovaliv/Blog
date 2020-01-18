@@ -15,7 +15,6 @@ import java.util.Properties;
 @Component
 public class HibernateUtil {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     private SessionFactory buildSessionFactory() {
@@ -52,7 +51,7 @@ public class HibernateUtil {
     }
 
     @Bean
-    public SessionFactory getSessionFactory() {
+    public SessionFactory sessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = buildSessionFactory();
         }

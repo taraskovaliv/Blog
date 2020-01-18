@@ -1,16 +1,13 @@
 <div id="sidebar">
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ page import="com.kovaliv.blog.controllers.LoginController" %>
-    <%@ page import="com.kovaliv.blog.hibernate.models.User" %>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <%!
-        User user = LoginController.getUser();
+        Principal user = request.getUserPrincipal();
     %>
-    <c:choose>
-        <c:when test="${user ne null}">
-            <jsp:include page="menu1.jsp" />
-        </c:when>
-        <c:otherwise>
-            <jsp:include page="menu2.jsp" />
-        </c:otherwise>
-    </c:choose>
+    <sec:authorize access="isAuthenticated()">
+        <jsp:include page="menu1.jsp" />
+    </sec:authorize>
+    <sec:authorize access="!isAuthenticated()">
+        <jsp:include page="menu2.jsp" />
+    </sec:authorize>
 </div>

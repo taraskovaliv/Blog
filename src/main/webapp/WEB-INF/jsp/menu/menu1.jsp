@@ -1,10 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ page import="com.kovaliv.blog.controllers.LoginController" %>
-    <%@ page import="com.kovaliv.blog.hibernate.models.User" %>
-    <%!
-        User user = LoginController.getUser();
-        String name = user.toString();
-    %>
 <c:if test="not empty ${name}">
     <br>
         <p>${name}</p>
