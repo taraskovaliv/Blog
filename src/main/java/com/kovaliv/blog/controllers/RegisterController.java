@@ -34,7 +34,7 @@ public class RegisterController {
         User user1 = (User) userService.loadUserByUsername(user.getLogin());
         if (user1 == null) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole(Role.USER);
+            user.setRole("USER");
             userRepo.add(user);
             return "redirect:/index";
         }

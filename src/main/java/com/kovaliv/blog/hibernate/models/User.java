@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID"})})
-public class User implements Serializable, UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +35,7 @@ public class User implements Serializable, UserDetails {
     private String name;
 
     @Column(name = "role")
-    private Role role;
+    private String role;
 
     public int getId() {
         return id;
@@ -56,7 +56,11 @@ public class User implements Serializable, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = new HashSet<>();
-        roles.add(role);
+        for (Role role : Role.values()) {
+            if (role.toString().equals(this.role)) {
+                roles.add(role);
+            }
+        }
         return roles;
     }
 
@@ -93,11 +97,11 @@ public class User implements Serializable, UserDetails {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -127,6 +131,14 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public String toString() {
-        return "User { " + surname + ' ' + name + " }";
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
