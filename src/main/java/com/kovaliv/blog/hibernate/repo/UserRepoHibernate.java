@@ -1,21 +1,26 @@
 package com.kovaliv.blog.hibernate.repo;
 
+import com.kovaliv.blog.hibernate.HibernateUtil;
 import com.kovaliv.blog.hibernate.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-@Service
 @Repository
 public class UserRepoHibernate implements UserRepo {
 
-    @Autowired
+    Logger logger = LogManager.getLogger(UserRepoHibernate.class);
+
     private SessionFactory sessionFactory;
+
+    public UserRepoHibernate() {
+        sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     @Override
     public void add(User user) {
@@ -26,11 +31,14 @@ public class UserRepoHibernate implements UserRepo {
             session.persist(user);
             session.getTransaction().commit();
             session.close();
+            logger.info("Added " + user.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+        } catch (Exception ex) {
+            logger.warn(ex.getMessage() + " exception");
         }
     }
 
@@ -43,11 +51,12 @@ public class UserRepoHibernate implements UserRepo {
             session.delete(user);
             session.getTransaction().commit();
             session.close();
+            logger.info("Deleted " + user.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
@@ -61,11 +70,12 @@ public class UserRepoHibernate implements UserRepo {
             session.delete(user);
             session.getTransaction().commit();
             session.close();
+            logger.info("Deleted " + user.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
@@ -78,12 +88,14 @@ public class UserRepoHibernate implements UserRepo {
             User user = session.load(User.class, id);
             session.getTransaction().commit();
             session.close();
+            logger.info("Getted by id " + user.toString());
             return user;
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+            return null;
         }
     }
 
@@ -98,11 +110,12 @@ public class UserRepoHibernate implements UserRepo {
             session.save(user);
             session.getTransaction().commit();
             session.close();
+            logger.info("Edited " + user1.toString() + " to " + user.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
@@ -116,12 +129,14 @@ public class UserRepoHibernate implements UserRepo {
             User user = (User) criteria.add(Restrictions.eq("login", login)).uniqueResult();
             session.getTransaction().commit();
             session.close();
+            logger.info("Getted by login " + user.toString());
             return user;
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+            return null;
         }
     }
 
@@ -135,12 +150,14 @@ public class UserRepoHibernate implements UserRepo {
             User user = (User) criteria.add(Restrictions.eq("email", email)).uniqueResult();
             session.getTransaction().commit();
             session.close();
+            logger.info("Getted by Email " + user.toString());
             return user;
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+            return null;
         }
     }
 }

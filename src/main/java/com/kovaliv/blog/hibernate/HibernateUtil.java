@@ -6,18 +6,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-@Component
 public class HibernateUtil {
 
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    private SessionFactory buildSessionFactory() {
+    private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration();
 
@@ -26,9 +22,6 @@ public class HibernateUtil {
 
             Properties properties = new Properties();
             properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
-//            properties.put("hibernate.connection.url", "jdbc:mysql://db4free.net:3306/blogtaras");
-//            properties.put("hibernate.connection.username", "taraskovaliv");
-//            properties.put("hibernate.connection.password", "1111taras");
 
             properties.put("hibernate.connection.url", "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2318381");
             properties.put("hibernate.connection.username", "sql2318381");
@@ -50,8 +43,7 @@ public class HibernateUtil {
         }
     }
 
-    @Bean
-    public SessionFactory sessionFactory() {
+    public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             sessionFactory = buildSessionFactory();
         }

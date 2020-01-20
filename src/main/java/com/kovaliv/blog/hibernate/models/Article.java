@@ -1,38 +1,39 @@
 package com.kovaliv.blog.hibernate.models;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = "Article_ID")})
+@Table(name = "Article", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID"})})
 public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Article_ID", nullable = false, unique = true)
-    private int articleId;
+    @Column(name = "ID", nullable = false, unique = true)
+    private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "text")
     private String text;
 
     @Column(name = "reads")
-    @ColumnDefault("0")
     private int reads;
 
     @Column(name = "author")
     private int author;
 
-    public int getArticleId() {
-        return articleId;
+    @Column(name = "date")
+    private Date date;
+
+    public int getId() {
+        return id;
     }
 
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -59,4 +60,30 @@ public class Article implements Serializable {
         this.reads = reads;
     }
 
+    public int getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + id +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                ", reads=" + reads +
+                ", author=" + author +
+                '}';
+    }
 }

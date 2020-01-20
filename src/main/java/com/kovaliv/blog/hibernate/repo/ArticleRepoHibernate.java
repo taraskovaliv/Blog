@@ -1,12 +1,14 @@
 package com.kovaliv.blog.hibernate.repo;
 
+import com.kovaliv.blog.hibernate.HibernateUtil;
 import com.kovaliv.blog.hibernate.models.Article;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,13 @@ import org.springframework.stereotype.Service;
 @Repository
 public class ArticleRepoHibernate implements ArticleRepo {
 
-    @Autowired
+    private final Logger logger = LogManager.getLogger(ArticleRepoHibernate.class);
+
     private SessionFactory sessionFactory;
 
+    public ArticleRepoHibernate() {
+        sessionFactory = HibernateUtil.getSessionFactory();
+    }
 
     @Override
     public void add(Article article) {
@@ -27,11 +33,12 @@ public class ArticleRepoHibernate implements ArticleRepo {
             session.persist(article);
             session.getTransaction().commit();
             session.close();
+            logger.info("Added " + article.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
@@ -48,7 +55,6 @@ public class ArticleRepoHibernate implements ArticleRepo {
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
