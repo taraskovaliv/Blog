@@ -5,19 +5,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"ID"})})
+@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"userID"})})
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false, unique = true)
-    private int id;
+    @Column(name = "userID", nullable = false, unique = true)
+    private int userId;
 
     @Column(name = "login", nullable = false, unique = true)
     private String login;
@@ -37,12 +36,12 @@ public class User implements UserDetails {
     @Column(name = "role")
     private String role;
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int іd) {
-        this.id = іd;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getLogin() {
@@ -132,7 +131,7 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + userId +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
