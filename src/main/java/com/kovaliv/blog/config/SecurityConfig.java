@@ -50,6 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     SessionFactory sessionFactory(){
-        return HibernateUtil.sessionFactory();
+        return HibernateUtil.getSessionFactory();
     }
 }

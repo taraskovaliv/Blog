@@ -51,7 +51,9 @@ public class ArticleRepoHibernate implements ArticleRepo {
             session.delete(article);
             session.getTransaction().commit();
             session.close();
+            logger.info("Deleted " + article.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
@@ -68,11 +70,12 @@ public class ArticleRepoHibernate implements ArticleRepo {
             session.delete(article);
             session.getTransaction().commit();
             session.close();
+            logger.info("Deleted " + article.toString());
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
         }
     }
 
@@ -82,15 +85,17 @@ public class ArticleRepoHibernate implements ArticleRepo {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            Article article = session.load(Article.class, id);
+            Article article = session.get(Article.class, id);
             session.getTransaction().commit();
             session.close();
+            logger.info("Getted by id" + article.toString());
             return article;
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+            return null;
         }
     }
 
@@ -104,12 +109,14 @@ public class ArticleRepoHibernate implements ArticleRepo {
             Article article = (Article) criteria.add(Restrictions.eq("name", name)).uniqueResult();
             session.getTransaction().commit();
             session.close();
+            logger.info("Getted by name" + article.toString());
             return article;
         } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            throw ex;
+            return null;
         }
     }
 }

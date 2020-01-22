@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 @ContextConfiguration(
@@ -36,30 +36,40 @@ public class RepoTest {
     public void userRepoTest() {
         passwordEncoder = new BCryptPasswordEncoder();
         userRepo = new UserRepoHibernate();
-        User user = getDefaultUser();
+
+        User user = userRepo.get(1);
+        user.setSurname(user.getSurname() + "v");
+        userRepo.edit(user);
+
+        user = getDefaultUser();
         userRepo.add(user);
         user = userRepo.getByEmail(user.getEmail());
         userRepo.delete(user);
+
         user = getDefaultUser();
         userRepo.add(user);
-        userRepo.delete(userRepo.get(user.getLogin()).getId());
+        userRepo.delete(userRepo.get(user.getLogin()).getUserId());
     }
 
     @Test
     public void articleRepoTest() {
         articleRepo = new ArticleRepoHibernate();
+
+        articleRepo.get(1);
+
         Article article = getDefaultArticle();
-        logger.info(article.toString());
-        logger.info(articleRepo.getClass().toString());
-        article = articleRepo.get(article.getName());
-        article.setName("Article2");
         articleRepo.add(article);
+        articleRepo.delete(article);
+
+        article = getDefaultArticle();
+        articleRepo.add(article);
+        article = articleRepo.get("Article2");
+        articleRepo.delete(article.getId());
     }
 
     private User getDefaultUser() {
         User user = new User();
         user.setLogin("taras111");
-        user.setId(0);
         user.setPassword(passwordEncoder.encode("1111"));
         user.setEmail("taras1904@gmail.com");
         user.setName("Taras");
@@ -70,10 +80,8 @@ public class RepoTest {
 
     private Article getDefaultArticle() {
         Article article = new Article();
-        article.setId(0);
-        article.setAuthor(1);
         article.setDate(new Date(System.currentTimeMillis()));
-        article.setName("Article");
+        article.setName("Article2");
         article.setText("Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.\n" +
                 "Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.\n" +
                 "Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.");

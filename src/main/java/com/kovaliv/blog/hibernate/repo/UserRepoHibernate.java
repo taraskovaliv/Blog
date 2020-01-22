@@ -85,7 +85,7 @@ public class UserRepoHibernate implements UserRepo {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user = session.load(User.class, id);
+            User user = session.get(User.class, id);
             session.getTransaction().commit();
             session.close();
             logger.info("Getted by id " + user.toString());
@@ -105,12 +105,10 @@ public class UserRepoHibernate implements UserRepo {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            User user1 = session.load(User.class, user.getId());
-            session.delete(user1);
-            session.save(user);
+            session.saveOrUpdate(user);
             session.getTransaction().commit();
             session.close();
-            logger.info("Edited " + user1.toString() + " to " + user.toString());
+            logger.info("Edited " + user.toString());
         } catch (HibernateException ex) {
             logger.warn(ex.getMessage());
             if (session != null) {
