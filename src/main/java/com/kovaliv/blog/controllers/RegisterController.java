@@ -1,40 +1,27 @@
 package com.kovaliv.blog.controllers;
 
-import com.kovaliv.blog.hibernate.enams.Role;
 import com.kovaliv.blog.hibernate.models.User;
+import com.kovaliv.blog.hibernate.repo.Repos;
 import com.kovaliv.blog.hibernate.repo.UserRepo;
-import com.kovaliv.blog.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.kovaliv.blog.hibernate.repo.UserRepoHibernate;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-
 public class RegisterController {
 
-    @Autowired
-    private UserRepo userRepo;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @GetMapping(value = "/register")
-    public String getRegister() {
+    public String getRegister(Model model) {
         return "pages/register";
     }
 
     @PostMapping(value = "/register")
     public String register(@Validated User user, Model model) {
-        User user1 = (User) userService.loadUserByUsername(user.getLogin());
+        UserRepo userRepo = Repos.getUserRepo();
+
+        User user1 = userRepo.get(user.getLogin());
         if (user1 == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRole("USER");
             userRepo.add(user);
             return "redirect:/index";
         }

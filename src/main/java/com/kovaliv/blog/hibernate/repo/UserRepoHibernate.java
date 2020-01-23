@@ -9,9 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class UserRepoHibernate implements UserRepo {
 
     Logger logger = LogManager.getLogger(UserRepoHibernate.class);

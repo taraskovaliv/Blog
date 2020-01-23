@@ -1,5 +1,5 @@
 <div id="header">
-    <a href="index">
+    <a href="/">
         <h1>This is blog</h1>
     <a>
 </div>

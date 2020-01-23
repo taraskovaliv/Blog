@@ -5,15 +5,8 @@
 
    <jsp:include page="../fragments/head.jsp" />
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-   <%@ page import = "com.kovaliv.blog.controllers.LoginController" %>
+   <%@ page import="com.kovaliv.blog.services.AuthorizationService" %>
    <%@ page import = "com.kovaliv.blog.hibernate.models.User" %>
-   <%!
-       User user = LoginController.getUser();
-       String name = user.toString();
-       String login = user.getLogin();
-       Integer id = user.getId();
-       String email = user.getEmail();
-   %>
    <body>
         <jsp:include page="../fragments/header.jsp" />
         <div id="content">
@@ -23,8 +16,9 @@
 
                 <p>Your id = ${id}</p>
                 <p>You are ${name}</p>
+                <p>You are ${surname}</p>
                 <p>Your email ${email}</p>
-            <form  action="editProfile" method="get">
+            <form  action="/editProfile" method="get">
                 <button type="submit" value="Edit Profile">Edit Profile</button>
             </form>
         </div>

@@ -16,7 +16,7 @@
                 <p id = "message">${message}</p>
                 <br>
 
-                <form action="register" method="post">
+                <form action="/register" method="post">
                     <p>Name</p>
                         <input type="text" name="name"><br>
                     <p>Surname</p>

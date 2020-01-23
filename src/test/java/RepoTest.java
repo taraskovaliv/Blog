@@ -1,27 +1,14 @@
-import com.kovaliv.blog.config.SecurityConfig;
-import com.kovaliv.blog.config.WebConfig;
 import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
 import com.kovaliv.blog.hibernate.repo.ArticleRepo;
-import com.kovaliv.blog.hibernate.repo.ArticleRepoHibernate;
+import com.kovaliv.blog.hibernate.repo.Repos;
 import com.kovaliv.blog.hibernate.repo.UserRepo;
-import com.kovaliv.blog.hibernate.repo.UserRepoHibernate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.sql.Date;
 
-
-@ContextConfiguration(
-        classes = {
-                SecurityConfig.class,
-                WebConfig.class
-        }
-)
 public class RepoTest {
 
     private final Logger logger = LogManager.getLogger(RepoTest.class);
@@ -30,12 +17,9 @@ public class RepoTest {
 
     private ArticleRepo articleRepo;
 
-    private PasswordEncoder passwordEncoder;
-
     @Test
     public void userRepoTest() {
-        passwordEncoder = new BCryptPasswordEncoder();
-        userRepo = new UserRepoHibernate();
+        userRepo = Repos.getUserRepo();
 
         User user = userRepo.get(1);
         user.setSurname(user.getSurname() + "v");
@@ -53,7 +37,7 @@ public class RepoTest {
 
     @Test
     public void articleRepoTest() {
-        articleRepo = new ArticleRepoHibernate();
+        articleRepo = Repos.getArticleRepo();
 
         articleRepo.get(1);
 
@@ -67,10 +51,10 @@ public class RepoTest {
         articleRepo.delete(article.getId());
     }
 
-    private User getDefaultUser() {
+    public User getDefaultUser() {
         User user = new User();
         user.setLogin("taras111");
-        user.setPassword(passwordEncoder.encode("1111"));
+        user.setPassword("1111");
         user.setEmail("taras1904@gmail.com");
         user.setName("Taras");
         user.setSurname("Korol");
