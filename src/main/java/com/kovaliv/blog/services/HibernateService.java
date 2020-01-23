@@ -1,4 +1,4 @@
-package com.kovaliv.blog.hibernate;
+package com.kovaliv.blog.services;
 
 import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
-public class HibernateUtil {
+public class HibernateService {
 
     private static SessionFactory sessionFactory;
 
@@ -23,9 +23,9 @@ public class HibernateUtil {
             Properties properties = new Properties();
             properties.put("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
 
-            properties.put("hibernate.connection.url", "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2318381");
-            properties.put("hibernate.connection.username", "sql2318381");
-            properties.put("hibernate.connection.password", "gD1!iU4*");
+            properties.put("hibernate.connection.url", "jdbc:mysql://db4free.net:3306/blogtaras");
+            properties.put("hibernate.connection.username", "taraskovaliv");
+            properties.put("hibernate.connection.password", "1111taras");
             properties.put("hibernate.current_session_context_class", "thread");
 
             configuration.setProperties(properties);

@@ -1,3 +1,4 @@
+import com.kovaliv.blog.hibernate.enams.Role;
 import com.kovaliv.blog.hibernate.models.Article;
 import com.kovaliv.blog.hibernate.models.User;
 import com.kovaliv.blog.hibernate.repo.ArticleRepo;
@@ -13,13 +14,9 @@ public class RepoTest {
 
     private final Logger logger = LogManager.getLogger(RepoTest.class);
 
-    private UserRepo userRepo;
-
-    private ArticleRepo articleRepo;
-
     @Test
     public void userRepoTest() {
-        userRepo = Repos.getUserRepo();
+        UserRepo userRepo = Repos.getUserRepo();
 
         User user = userRepo.get(1);
         user.setSurname(user.getSurname() + "v");
@@ -37,7 +34,7 @@ public class RepoTest {
 
     @Test
     public void articleRepoTest() {
-        articleRepo = Repos.getArticleRepo();
+        ArticleRepo articleRepo = Repos.getArticleRepo();
 
         articleRepo.get(1);
 
@@ -58,7 +55,7 @@ public class RepoTest {
         user.setEmail("taras1904@gmail.com");
         user.setName("Taras");
         user.setSurname("Korol");
-        user.setRole("USER");
+        user.setRole(Role.USER.name());
         return user;
     }
 
@@ -66,6 +63,7 @@ public class RepoTest {
         Article article = new Article();
         article.setDate(new Date(System.currentTimeMillis()));
         article.setName("Article2");
+        article.setAuthor("taras");
         article.setText("Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.\n" +
                 "Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.\n" +
                 "Some text and some thinks. Some text and some thinks. Some text and some thinks. Some text and some thinks.");

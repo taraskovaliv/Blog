@@ -19,6 +19,9 @@ public class Article implements Serializable {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "author")
+    private String author;
+
     @Column(name = "date")
     private Date date;
 
@@ -46,6 +49,14 @@ public class Article implements Serializable {
         this.text = text;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -60,6 +71,7 @@ public class Article implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", text='" + text + '\'' +
+                ", author='" + author + '\'' +
                 ", date='" + date.toString() + '\'' +
                 '}';
     }

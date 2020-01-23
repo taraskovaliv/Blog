@@ -1,6 +1,6 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.hibernate.HibernateUtil;
+import com.kovaliv.blog.services.HibernateService;
 import com.kovaliv.blog.hibernate.models.Article;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +9,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 public class ArticleRepoHibernate implements ArticleRepo {
 
@@ -18,7 +19,7 @@ public class ArticleRepoHibernate implements ArticleRepo {
     private SessionFactory sessionFactory;
 
     public ArticleRepoHibernate(){
-        sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactory = HibernateService.getSessionFactory();
     }
 
     @Override
@@ -115,5 +116,15 @@ public class ArticleRepoHibernate implements ArticleRepo {
             }
             return null;
         }
+    }
+
+    @Override
+    public List<Article> getArticles(String login) {
+        return null;
+    }
+
+    @Override
+    public List<Article> getLast(int num) {
+        return null;
     }
 }
