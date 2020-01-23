@@ -1,6 +1,6 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.hibernate.HibernateUtil;
+import com.kovaliv.blog.services.HibernateService;
 import com.kovaliv.blog.hibernate.models.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ public class UserRepoHibernate implements UserRepo {
     private SessionFactory sessionFactory;
 
     public UserRepoHibernate() {
-        sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactory = HibernateService.getSessionFactory();
     }
 
     @Override
