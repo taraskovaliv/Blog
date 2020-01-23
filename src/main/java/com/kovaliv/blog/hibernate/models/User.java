@@ -1,17 +1,10 @@
 package com.kovaliv.blog.hibernate.models;
 
-import com.kovaliv.blog.hibernate.enams.Role;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"userID"})})
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,42 +43,6 @@ public class User implements UserDetails {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = new HashSet<>();
-        for (Role role : Role.values()) {
-            if (role.toString().equals(this.role)) {
-                roles.add(role);
-            }
-        }
-        return roles;
-    }
-
-    @Override
-    public String getUsername() {
-        return getLogin();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     public String getPassword() {

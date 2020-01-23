@@ -9,18 +9,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-@Repository
 public class ArticleRepoHibernate implements ArticleRepo {
 
     private final Logger logger = LogManager.getLogger(ArticleRepoHibernate.class);
 
     private SessionFactory sessionFactory;
 
-    public ArticleRepoHibernate() {
+    public ArticleRepoHibernate(){
         sessionFactory = HibernateUtil.getSessionFactory();
     }
 

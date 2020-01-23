@@ -16,7 +16,7 @@
                 <p id = "message">${message}</p>
                 <br>
 
-                <form action="/processing_login" method="post">
+                <form action="/login" method="post">
                     <p>Username</p>
                         <input type="text" name="login"><br>
                     <p>Password</p>

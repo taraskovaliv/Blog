@@ -10,7 +10,7 @@
             <div id = "center_form">
                 <h2>Add new Article</h2>
                 <p id = "message">${message}</p>
-                <form action="addArticle" method="post">
+                <form action="/addArticle" method="post">
                     <p>Input name of article</p>
                         <input type="text" name="name"><br>
                     <p>Input text of article</p>
