@@ -2,8 +2,6 @@ package com.kovaliv.blog.controllers;
 
 import com.kovaliv.blog.exceptions.MessageException;
 import com.kovaliv.blog.hibernate.models.User;
-import com.kovaliv.blog.hibernate.repo.Repos;
-import com.kovaliv.blog.hibernate.repo.UserRepo;
 import com.kovaliv.blog.services.AuthorizationService;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;

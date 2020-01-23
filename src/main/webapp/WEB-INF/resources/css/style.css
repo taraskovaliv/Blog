@@ -27,6 +27,22 @@ h2 {
     text-decoration: none;
 }
 
+#menu_button{
+    border: outset;
+    border-width: 3px;
+    border-radius: 5px;
+    padding-right: 2%;
+    padding-left: 2%;
+    margin:0px;
+    margin-top:3%;
+    text-align: center;
+}
+
+#menu_button a{
+    text-decoration: none;
+    color: black;
+}
+
 #sidebar {
     padding: 5px;
     margin: 10px 10px 20px 80%;
@@ -37,6 +53,15 @@ h2 {
     width: 75%;
     float: left;
     padding: 5px;
+}
+
+#article{
+    border: outset;
+    border-width: 5px;
+    border-radius: 10px;
+    padding-right: 4%;
+    padding-left: 4%;
+    margin: 1%;
 }
 
 #footer {

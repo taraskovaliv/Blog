@@ -18,7 +18,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String authorization(@Validated User user, Model model){
+    public String authorization(@Validated User user, Model model) {
         try {
             AuthorizationService.login(user);
         } catch (MessageException ex) {
@@ -29,7 +29,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         AuthorizationService.logout();
         return "redirect:/";
     }

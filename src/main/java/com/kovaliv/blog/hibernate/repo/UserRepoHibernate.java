@@ -1,7 +1,7 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.services.HibernateService;
 import com.kovaliv.blog.hibernate.models.User;
+import com.kovaliv.blog.services.HibernateService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
