@@ -1,7 +1,7 @@
 package com.kovaliv.blog.hibernate.repo;
 
-import com.kovaliv.blog.services.HibernateService;
 import com.kovaliv.blog.hibernate.models.Article;
+import com.kovaliv.blog.services.HibernateService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
@@ -18,7 +18,7 @@ public class ArticleRepoHibernate implements ArticleRepo {
 
     private SessionFactory sessionFactory;
 
-    public ArticleRepoHibernate(){
+    public ArticleRepoHibernate() {
         sessionFactory = HibernateService.getSessionFactory();
     }
 
@@ -120,11 +120,44 @@ public class ArticleRepoHibernate implements ArticleRepo {
 
     @Override
     public List<Article> getArticles(String login) {
-        return null;
+        Session session = null;
+        List<Article> list;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Criteria criteria = session.createCriteria(Article.class);
+            list = criteria.add(Restrictions.eq("author", login)).list();
+            session.getTransaction().commit();
+            session.close();
+            logger.info("Getted articles by login" + login);
+            return list;
+        } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            return null;
+        }
     }
 
     @Override
-    public List<Article> getLast(int num) {
-        return null;
+    public List<Article> getLast(Integer num) {
+        Session session = null;
+        List<Article> list;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            list = session.createQuery("from Article order by id DESC").setMaxResults(num).list();
+            session.getTransaction().commit();
+            session.close();
+            logger.info("Getted last " + num.toString() + " articles");
+            return list;
+        } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            return null;
+        }
     }
 }

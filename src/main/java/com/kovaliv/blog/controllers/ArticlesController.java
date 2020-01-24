@@ -18,8 +18,8 @@ public class ArticlesController {
     @GetMapping(value = "/myArticles")
     public static String getMyArticles(Model model) {
         AuthorizationService.setUserAttributes(model);
-
-
+        ArticleRepo articleRepo = Repos.getArticleRepo();
+        model.addAttribute("list", articleRepo.getArticles(AuthorizationService.getUser().getLogin()));
         return "pages/articles";
     }
 
@@ -34,8 +34,9 @@ public class ArticlesController {
     public static String addArticles(@Validated Article article, Model model) {
         ArticleRepo articleRepo = Repos.getArticleRepo();
         article.setDate(new Date(System.currentTimeMillis()));
+        article.setAuthor(AuthorizationService.getUser().getLogin());
         articleRepo.add(article);
-        return getMyArticles(model);
+        return "redirect:/myArticles";
     }
 
     @GetMapping(value = "/addArticle")

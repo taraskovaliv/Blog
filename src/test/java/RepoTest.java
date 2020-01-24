@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
+import java.util.List;
 
 public class RepoTest {
 
@@ -46,6 +47,16 @@ public class RepoTest {
         articleRepo.add(article);
         article = articleRepo.get("Article2");
         articleRepo.delete(article.getId());
+
+        List<Article> articles = articleRepo.getArticles("taras");
+        for (Article article1 : articles) {
+            logger.info(article1.toString());
+        }
+
+        articles = articleRepo.getLast(2);
+        for (Article article1 : articles) {
+            logger.info(article1.toString());
+        }
     }
 
     public User getDefaultUser() {
