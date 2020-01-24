@@ -10,13 +10,7 @@
 
         <div id="content">
             <h2>Recent articles on the site</h2>
-            <c:forEach items="${list}" var="article">
-                <div id="article">
-                    <h4>${article.name}</h4>
-                    <p>@${article.author}</p>
-                    <p>${article.text}</p>
-                </div>
-            </c:forEach>
+            <jsp:include page="pages/article/articlesList.jsp" />
         </div>
         <jsp:include page="menu/menu.jsp" />
         <jsp:include page="fragments/footer.jsp" />

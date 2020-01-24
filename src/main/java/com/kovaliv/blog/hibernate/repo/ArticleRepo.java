@@ -9,6 +9,8 @@ public interface ArticleRepo {
 
     void add(Article article);
 
+    void edit(Article article);
+
     void delete(Article article);
 
     void delete(Integer id);

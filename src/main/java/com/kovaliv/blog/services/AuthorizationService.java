@@ -68,6 +68,10 @@ public class AuthorizationService {
 
     public static void setUserAttributes(Model model) {
         User user = AuthorizationService.getUser();
+        if (user == null){
+            model.addAttribute("login", null);
+            return;
+        }
         model.addAttribute("id", user.getUserId());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("login", user.getLogin());

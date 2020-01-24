@@ -125,7 +125,9 @@ public class UserRepoHibernate implements UserRepo {
             User user = (User) criteria.add(Restrictions.eq("login", login)).uniqueResult();
             session.getTransaction().commit();
             session.close();
-            logger.info("Getted by login " + user.toString());
+            if (user != null) {
+                logger.info("Getted by login " + user.toString());
+            }
             return user;
         } catch (HibernateException ex) {
             logger.warn(ex.getMessage());
@@ -146,7 +148,9 @@ public class UserRepoHibernate implements UserRepo {
             User user = (User) criteria.add(Restrictions.eq("email", email)).uniqueResult();
             session.getTransaction().commit();
             session.close();
-            logger.info("Getted by Email " + user.toString());
+            if (user != null) {
+                logger.info("Getted by Email " + user.toString());
+            }
             return user;
         } catch (HibernateException ex) {
             logger.warn(ex.getMessage());

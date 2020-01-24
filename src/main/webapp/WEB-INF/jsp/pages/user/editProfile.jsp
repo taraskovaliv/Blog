@@ -12,12 +12,12 @@
 <!DOCTYPE html>
 <html lang="ua">
 
-   <jsp:include page="../fragments/headSmall.jsp" />
+   <jsp:include page="../../fragments/headSmall.jsp" />
 
 
    <body>
         <div id="small">
-            <jsp:include page="../fragments/header.jsp" />
+            <jsp:include page="../../fragments/header.jsp" />
 
             <div id = "center_form">
 
@@ -36,7 +36,7 @@
                 </form>
             </div>
 
-            <jsp:include page="../fragments/footer.jsp" />
+            <jsp:include page="../../fragments/footer.jsp" />
         </div>
    </body>
 </html>

@@ -55,6 +55,10 @@ h2 {
     padding: 5px;
 }
 
+#profile{
+    text-align: center;
+}
+
 #article{
     border: outset;
     border-width: 5px;
@@ -62,6 +66,21 @@ h2 {
     padding-right: 4%;
     padding-left: 4%;
     margin: 1%;
+}
+
+#small_button{
+    text-decoration: none;
+    color: black;
+
+    border: outset;
+    border-width: 3px;
+    border-radius: 5px;
+    padding-right: 4%;
+    padding-left: 4%;
+    margin:0px;
+    margin-right:15%;
+    margin-left:15%;
+    text-align: center;
 }
 
 #footer {
