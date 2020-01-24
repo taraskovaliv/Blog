@@ -19,5 +19,5 @@ public interface ArticleRepo {
 
     List<Article> getArticles(String login);
 
-    List<Article> getLast(int num);
+    List<Article> getLast(Integer num);
 }

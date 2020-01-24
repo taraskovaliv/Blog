@@ -141,7 +141,23 @@ public class ArticleRepoHibernate implements ArticleRepo {
     }
 
     @Override
-    public List<Article> getLast(int num) {
-        return null;
+    public List<Article> getLast(Integer num) {
+        Session session = null;
+        List<Article> list;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            list = session.createQuery("from Article order by id DESC").setMaxResults(num).list();
+            session.getTransaction().commit();
+            session.close();
+            logger.info("Getted last " + num.toString() + " articles");
+            return list;
+        } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            return null;
+        }
     }
 }

@@ -1,12 +1,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="ua">
 
    <jsp:include page="../fragments/head.jsp" />
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-   <%@ page import="com.kovaliv.blog.services.AuthorizationService" %>
-   <%@ page import = "com.kovaliv.blog.hibernate.models.User" %>
+
    <body>
         <jsp:include page="../fragments/header.jsp" />
         <div id="content">

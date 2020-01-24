@@ -52,6 +52,11 @@ public class RepoTest {
         for (Article article1 : articles) {
             logger.info(article1.toString());
         }
+
+        articles = articleRepo.getLast(2);
+        for (Article article1 : articles) {
+            logger.info(article1.toString());
+        }
     }
 
     public User getDefaultUser() {
