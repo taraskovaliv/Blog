@@ -17,7 +17,7 @@
                         <input type="text" name="name" value="${article.name}"><br>
                     <p>Input text of article</p>
                         <textarea name="text" rows="15" cols="80">${article.text}</textarea>
-                    <p><input type="number" name="id" id="invisible" value="${article.id}"></p>
+                    <p id="invisible"><input type="number" name="id" id="invisible" value="${article.id}"></p>
 
                     <input id="button" type="submit" value="Edit article">
                 </form>

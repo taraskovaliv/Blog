@@ -6,8 +6,8 @@
             <h4>${article.name}</h4>
             <p><a href="/user/${article.author}">@${article.author}</a></p>
             <p>${article.text}</p>
-            <c:if test="${article.id} eq ${login}">
-                <p>(<a href="/deleteArticle/${article.id}">Delete</a>) , (<a href = "/editArticle/${article.id}">Edit</a>)</p>
+            <c:if test="${article.author eq login}">
+                <p><a href = "/editArticle/${article.id}" id="small_button">Edit</a><a href="/deleteArticle/${article.id}" id="small_button">Delete</a></p>
             </c:if>
         </div>
     </c:forEach>
