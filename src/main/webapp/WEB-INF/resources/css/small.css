@@ -29,6 +29,10 @@ h1  {
     text-align: center;
 }
 
+#invisible{
+    visibility: hidden;
+}
+
 #message{
     color: red;
 }

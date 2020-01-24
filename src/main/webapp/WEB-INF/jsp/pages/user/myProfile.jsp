@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="ua">
 
-   <jsp:include page="../fragments/head.jsp" />
+   <jsp:include page="../../fragments/head.jsp" />
 
    <body>
-        <jsp:include page="../fragments/header.jsp" />
+        <jsp:include page="../../fragments/header.jsp" />
         <div id="content">
             <h2>Profile ${login}</h2>
 
@@ -21,7 +21,7 @@
                 <button type="submit" value="Edit Profile">Edit Profile</button>
             </form>
         </div>
-        <jsp:include page="../menu/menu.jsp" />
-        <jsp:include page="../fragments/footer.jsp" />
+        <jsp:include page="../../menu/menu.jsp" />
+        <jsp:include page="../../fragments/footer.jsp" />
    </body>
 </html>

@@ -41,6 +41,24 @@ public class ArticleRepoHibernate implements ArticleRepo {
     }
 
     @Override
+    public void edit(Article article) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(article);
+            session.getTransaction().commit();
+            session.close();
+            logger.info("Edited " + article.toString());
+        } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        }
+    }
+
+    @Override
     public void delete(Article article) {
         Session session = null;
         try {
@@ -107,7 +125,7 @@ public class ArticleRepoHibernate implements ArticleRepo {
             Article article = (Article) criteria.add(Restrictions.eq("name", name)).uniqueResult();
             session.getTransaction().commit();
             session.close();
-            logger.info("Getted by name" + article.toString());
+            logger.info("Getted by name - " + article.toString());
             return article;
         } catch (HibernateException ex) {
             logger.warn(ex.getMessage());
@@ -129,7 +147,7 @@ public class ArticleRepoHibernate implements ArticleRepo {
             list = criteria.add(Restrictions.eq("author", login)).list();
             session.getTransaction().commit();
             session.close();
-            logger.info("Getted articles by login" + login);
+            logger.info("Getted articles by login - " + login);
             return list;
         } catch (HibernateException ex) {
             logger.warn(ex.getMessage());

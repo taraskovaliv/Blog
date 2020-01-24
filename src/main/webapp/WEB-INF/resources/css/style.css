@@ -55,6 +55,10 @@ h2 {
     padding: 5px;
 }
 
+#profile{
+    text-align: center;
+}
+
 #article{
     border: outset;
     border-width: 5px;
