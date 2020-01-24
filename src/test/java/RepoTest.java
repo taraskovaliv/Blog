@@ -30,7 +30,9 @@ public class RepoTest {
 
         user = getDefaultUser();
         userRepo.add(user);
-        userRepo.delete(userRepo.get(user.getLogin()).getUserId());
+        user = userRepo.get(user.getLogin());
+        userRepo.plusView(user);
+        userRepo.delete(user.getUserId());
     }
 
     @Test
@@ -67,6 +69,7 @@ public class RepoTest {
         user.setName("Taras");
         user.setSurname("Korol");
         user.setRole(Role.USER.name());
+        user.setViews(5);
         return user;
     }
 

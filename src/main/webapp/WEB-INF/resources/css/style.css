@@ -1,10 +1,10 @@
 body {
-    font: 11pt Arial, Helvetica, sans-serif;
+    font: 14px Comic Sans MS, Comic Sans, cursive;
     margin: 0;
 }
 
 h1  {
-    font-size: 36 px;
+    font-size: 40 px;
     margin: 0;
     color: #fff;
     clear: center;
@@ -23,7 +23,7 @@ h2 {
     text-decoration: none;
 }
 
-#header a {
+a {
     text-decoration: none;
 }
 
@@ -39,8 +39,8 @@ h2 {
 }
 
 #menu_button a{
-    text-decoration: none;
     color: black;
+    font-size: 17px;
 }
 
 #sidebar {
@@ -68,10 +68,18 @@ h2 {
     margin: 1%;
 }
 
+#text{
+    text-align: justify;
+}
+
+#date{
+    font-style: italic;
+    text-align: right;
+}
+
 #small_button{
     text-decoration: none;
     color: black;
-
     border: outset;
     border-width: 3px;
     border-radius: 5px;
@@ -90,4 +98,3 @@ h2 {
     color: #fff;
     clear: left;
 }
-

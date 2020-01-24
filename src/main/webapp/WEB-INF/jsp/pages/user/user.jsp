@@ -15,6 +15,7 @@
 
                 <p>${user.name}   ${user.surname}</p>
                 <p>Email:  ${user.email}</p>
+                <p>Profile views:  ${user.views}</p>
             </div>
             <jsp:include page="../article/articlesList.jsp" />
         </div>

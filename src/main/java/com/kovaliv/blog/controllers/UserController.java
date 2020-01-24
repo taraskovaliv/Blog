@@ -1,5 +1,6 @@
 package com.kovaliv.blog.controllers;
 
+import com.kovaliv.blog.hibernate.enams.LoginStatus;
 import com.kovaliv.blog.hibernate.models.User;
 import com.kovaliv.blog.hibernate.repo.ArticleRepo;
 import com.kovaliv.blog.hibernate.repo.Repos;
@@ -22,14 +23,24 @@ public class UserController {
     }
 
     @GetMapping("/user/{login}")
-    public String getUser(@PathVariable String login, Model model){
+    public String getUser(@PathVariable String login, Model model) {
         AuthorizationService.setUserAttributes(model);
 
         UserRepo userRepo = Repos.getUserRepo();
-        model.addAttribute("user", userRepo.get(login));
+        User user = userRepo.get(login);
+
+        model.addAttribute("user", user);
+        if (AuthorizationService.getLoginStatus() == LoginStatus.NOT_AUTHORIZED) {
+            userRepo.plusView(user);
+        } else {
+            if (!login.equals(AuthorizationService.getUser().getLogin())) {
+                userRepo.plusView(user);
+            }
+        }
 
         ArticleRepo articleRepo = Repos.getArticleRepo();
         model.addAttribute("list", articleRepo.getArticles(login));
+
 
         return "pages/user/user";
     }
