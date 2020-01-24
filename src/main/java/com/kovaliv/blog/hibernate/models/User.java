@@ -1,6 +1,7 @@
 package com.kovaliv.blog.hibernate.models;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"userID"})})
@@ -28,6 +29,9 @@ public class User {
 
     @Column(name = "role")
     private String role;
+
+    @Column(name = "views")
+    private Integer views;
 
     public int getUserId() {
         return userId;
@@ -85,6 +89,14 @@ public class User {
         this.surname = surname;
     }
 
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -95,6 +107,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
+                ", views='" + views + '\'' +
                 '}';
     }
 }

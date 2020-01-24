@@ -41,6 +41,25 @@ public class UserRepoHibernate implements UserRepo {
     }
 
     @Override
+    public void plusView(User user) {
+        Session session = null;
+        user.setViews(user.getViews() + 1);
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(user);
+            session.getTransaction().commit();
+            session.close();
+            logger.info("Plused views " + user.toString());
+        } catch (HibernateException ex) {
+            logger.warn(ex.getMessage());
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+        }
+    }
+
+    @Override
     public void delete(User user) {
         Session session = null;
         try {

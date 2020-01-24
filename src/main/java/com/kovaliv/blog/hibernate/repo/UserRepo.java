@@ -7,6 +7,8 @@ public interface UserRepo {
 
     void add(User user);
 
+    void plusView(User user);
+
     void delete(User user);
 
     void delete(Integer id);
